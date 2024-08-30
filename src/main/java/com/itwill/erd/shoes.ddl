@@ -24,7 +24,6 @@ CREATE TABLE product(
 		p_brand                       		VARCHAR2(10)		 NULL ,
 		p_price                       		NUMBER(10)		 NULL ,
 		p_image                       		VARCHAR2(100)		 NULL ,
-		cart_no                       		NUMBER(10)		 NULL 
 );
 
 DROP SEQUENCE product_p_no_SEQ;
