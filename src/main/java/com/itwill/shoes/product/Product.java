@@ -18,6 +18,7 @@ public class Product {
 	private String p_type;
 	private String P_brand;
 	private int p_price;
+	private String P_desc;
 	private String P_image;
 	
 	

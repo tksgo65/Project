@@ -12,7 +12,18 @@ CREATE TABLE userinfo(
 		phonenumber                   		NUMBER(10)		 NULL 
 );
 
+DROP SEQUENCE userinfo_password_SEQ;
 
+CREATE SEQUENCE userinfo_password_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+
+
+CREATE SEQUENCE userinfo_name_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
+
+DROP SEQUENCE userinfo_address_SEQ;
+
+CREATE SEQUENCE userinfo_address_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 
 
@@ -23,7 +34,8 @@ CREATE TABLE product(
 		p_type                        		VARCHAR2(100)		 NULL ,
 		p_brand                       		VARCHAR2(10)		 NULL ,
 		p_price                       		NUMBER(10)		 NULL ,
-		p_image                       		VARCHAR2(100)		 NULL ,
+		p_desc                        		VARCHAR2(100)		 NULL ,
+		p_image                       		VARCHAR2(100)		 NULL 
 );
 
 DROP SEQUENCE product_p_no_SEQ;
@@ -57,6 +69,7 @@ CREATE TABLE order_item(
 DROP SEQUENCE order_item_oi_no_SEQ;
 
 CREATE SEQUENCE order_item_oi_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+
 
 
 

@@ -16,9 +16,13 @@ import lombok.NoArgsConstructor;
 public class Cart {
 	private int cart_no;
 	private int cart_qty;
+	/********FK********/
+	//private String userid;
 	private User user;
+	/********FK********/
+	//private String p_no;
 	private Product product;
 	
 	
-
+	
 }

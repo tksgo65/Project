@@ -11,9 +11,11 @@ import com.itwill.shoes.common.DataSource;
 import com.itwill.shoes.product.Product;
 import com.itwill.shoes.user.User;
 
+
 public class CartDao {
 	
 	private DataSource dataSource;
+	
 	public CartDao() throws Exception{
 		dataSource = new DataSource();
 		
@@ -36,6 +38,7 @@ public class CartDao {
 		}
 		return deleteRowCount;
 	}
+	
 	public List<Cart> findByUserId(String userid) throws Exception{
 		List<Cart> cartList=new ArrayList<Cart>();
 		Connection con=null;
@@ -67,14 +70,84 @@ public class CartDao {
 			if(con!=null) {
 				dataSource.close(con);
 			}
-			
+		}
 			return cartList;
 			
+			
 		}
-	}
+/*
+ * cart 제품 존재여부		
+ */
 
-	
-	
+		public int countByProductNo(String sUserId,int p_no) throws Exception{
+			int count =0;
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				con=dataSource.getConnection();
+				pstmt=con.prepareStatement(CartSQL.CART_COUNT_BY_USERID_PRODUCT_NO);
+				pstmt.setString(1, sUserId);
+				pstmt.setInt(2, p_no);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					count=rs.getInt(1);
+				}
+			
+		
+			}finally {
+				if(con!=null) {
+					con.close();
+					
+				}
+			}
+			return count;
+		
+	}
+		public int updateByProductNo(Cart cart)throws Exception{
+			Connection con=null;
+			PreparedStatement pstmt = null;
+			int rowCount=0;
+			try {
+				con = dataSource.getConnection();
+				pstmt=con.prepareStatement(CartSQL.CART_UPDATE_BY_PRODUCT_NO_USERID);
+				pstmt.setInt(1, cart.getCart_qty());
+				pstmt.setString(2, cart.getUser().getUserId());
+				pstmt.setInt(3, cart.getProduct().getP_no());
+				rowCount = pstmt.executeUpdate();
+			}finally {
+				if(con!=null) {
+					con.close();
+				}
+			}
+			return rowCount;
+		}
+		public int updateByCartNo(Cart cart)throws Exception{
+			return 0;
+		}
+		
+		
+		
+		public int insert(Cart cart)throws Exception{
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			int insertRowCount=0;
+			try {
+				
+				con=dataSource.getConnection();
+				pstmt=con.prepareStatement(CartSQL.CART_INSERT);
+				pstmt.setInt(1, cart.getCart_qty());
+				pstmt.setInt(2, cart.getProduct().getP_no());
+				pstmt.setString(3, cart.getUser().getUserId());
+				insertRowCount = pstmt.executeUpdate();
+				
+			}finally {
+				if(con!=null) {
+					con.close();
+				}
+			}
+			return insertRowCount;
+		}
 	
 
 }
