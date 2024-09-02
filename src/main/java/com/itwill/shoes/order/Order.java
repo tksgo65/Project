@@ -25,7 +25,7 @@ public class Order {
 	private String o_name;
 	private Date o_date;
 	private int o_price; 
-	private User user; //FK
+	private String userid; //FK
 	
 	
 	@Default
