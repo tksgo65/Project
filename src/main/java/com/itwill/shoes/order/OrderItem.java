@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 public class OrderItem {
 	private int oi_no;
 	private int oi_qty;
-	private Order order; //Fk
-	private Product product; //FK
+	private Order order;
+	private Product product;
+	
 	
 	
 

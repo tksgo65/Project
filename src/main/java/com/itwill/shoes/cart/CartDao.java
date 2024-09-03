@@ -60,9 +60,9 @@ public class CartDao {
 								.p_no(rs.getInt("p_no"))
 								.p_name(rs.getString("p_name"))
 								.p_type(rs.getString("p_type"))
-								.P_brand(rs.getString("p_brand"))
+								.p_brand(rs.getString("p_brand"))
 								.p_price(rs.getInt("p_price"))
-								.P_image(rs.getString("p_image"))
+								.p_image(rs.getString("p_image"))
 								.build())
 						.build());
 			}
