@@ -21,7 +21,7 @@ public class UserDao {
 		pstmt.setString(2, user.getPassword());
 		pstmt.setString(3, user.getName());
 		pstmt.setString(4, user.getAddress());
-		pstmt.setInt(5, user.getPhonenumber());
+		pstmt.setString(5, user.getPhonenumber());
 		int rowCount=pstmt.executeUpdate();
 		pstmt.close();
 		con.close();
@@ -35,7 +35,7 @@ public class UserDao {
 		pstmt.setString(1, user.getPassword());
 		pstmt.setString(2, user.getName());
 		pstmt.setString(3, user.getAddress());
-		pstmt.setInt(4, user.getPhonenumber());
+		pstmt.setString(4, user.getPhonenumber());
 		pstmt.setString(5, user.getUserId());
 		int rowCount=pstmt.executeUpdate();
 		pstmt.close();
@@ -63,7 +63,7 @@ public class UserDao {
 					rs.getString("password"),
 					rs.getString("name"),
 					rs.getString("address"),
-					rs.getInt("phonenumber"));
+					rs.getString("phonenumber"));
 					
 		}
 		return user;

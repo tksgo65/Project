@@ -9,8 +9,8 @@ CREATE TABLE userinfo(
 		password                      		VARCHAR2(100)		 NULL ,
 		name                          		VARCHAR2(100)		 NULL ,
 		address                       		VARCHAR2(100)		 NULL ,
-		phonenumber                   		NUMBER(10)		 NULL 
-);
+		phonenumber                  		VARCHAR2(100)		 NULL 
+); 
 
 DROP SEQUENCE userinfo_password_SEQ;
 
