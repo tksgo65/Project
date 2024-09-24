@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 
 import com.itwill.shoes.common.DataSource;
 
-import oracle.jdbc.proxy.annotation.Pre;
 
 public class UserDao {
 	private DataSource dataSource;

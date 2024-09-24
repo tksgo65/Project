@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import javax.swing.event.ChangeListener;
@@ -34,6 +35,8 @@ import java.awt.Rectangle;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Cursor;
 
 public class ShopMainFrame extends JFrame {
 
@@ -80,7 +83,7 @@ public class ShopMainFrame extends JFrame {
 	 */
 	public ShopMainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 563, 701);
+		setBounds(100, 100, 581, 701);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -98,15 +101,18 @@ public class ShopMainFrame extends JFrame {
 		middlePane.addTab("Popularshoes", null, Popular, null);
 		Popular.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		Popular.add(scrollPane, BorderLayout.CENTER);
+		JScrollPane productPopularshoesContentPanelScrollPane = new JScrollPane();
+		Popular.add(productPopularshoesContentPanelScrollPane, BorderLayout.CENTER);
 		
 		JPanel productPopularshoesCententPanel = new JPanel();
+		productPopularshoesCententPanel.setOpaque(false);
+		productPopularshoesCententPanel.setDoubleBuffered(false);
+		productPopularshoesCententPanel.setBorder(null);
 		FlowLayout flowLayout = (FlowLayout) productPopularshoesCententPanel.getLayout();
 		flowLayout.setVgap(7);
 		flowLayout.setHgap(7);
 		flowLayout.setAlignment(FlowLayout.LEFT);
-		scrollPane.setViewportView(productPopularshoesCententPanel);
+		productPopularshoesContentPanelScrollPane.setViewportView(productPopularshoesCententPanel);
 		
 		
 		/********popular shoes 시작 ***************/
@@ -125,13 +131,40 @@ public class ShopMainFrame extends JFrame {
 		
 		productImageLabel.setIcon(new ImageIcon(ShopMainFrame.class.getResource("/images/shoes.png")));
 		
-		JLabel productDestLabel = new JLabel("<html>\r\n\t<font size='3'>\r\n\t\t\r\n\t\t\t이름 : New Balance 2002R Grey<br>\r\n\t\t\t브랜드 : New Balance<br>\r\n\t\t\t가격 : 135,000원 <br>\r\n\t\t       설명 : MR2002의 라이프스타일 버전\r\n </font></html>");
-		productDestLabel.setFont(new Font("굴림", Font.PLAIN, 12));
+		JLabel productDestLabel = new JLabel("<html>\r\n\t<font size='2'>\r\n\t\t\r\n\t\t\t이름 : New Balance 2002R Grey<br>\r\n\t\t\t브랜드 : New Balance<br>\r\n\t\t\t가격 : 135,000원 <br>\r\n\t\t       설명 : MR2002의 라이프스타일 버전\r\n </font></html>");
+		productDestLabel.setFont(new Font("굴림", Font.PLAIN, 10));
 		productDestLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		productDestLabel.setVerticalAlignment(SwingConstants.TOP);
 		productDestLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		productDestLabel.setBounds(0, 102, 124, 108);
 		productPanel.add(productDestLabel);
+		
+		JComboBox cartQtyComboBox = new JComboBox();
+		cartQtyComboBox.setBorder(null);
+		cartQtyComboBox.setMaximumRowCount(10);
+		cartQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		cartQtyComboBox.setAutoscrolls(true);
+		cartQtyComboBox.setOpaque(false);
+		cartQtyComboBox.setBounds(126, 115, 32, 23);
+		productPanel.add(cartQtyComboBox);
+		
+		productPopularshoesCententPanel.add(productPanel);
+		
+		JButton cartAddButton = new JButton("");
+		cartAddButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(">>카트담기...");
+				
+				
+			}
+		});
+		cartAddButton.setBorder(null);
+		cartAddButton.setBounds(136, 187, 34, 23);
+		productPanel.add(cartAddButton);
+		cartAddButton.setOpaque(false);
+		cartAddButton.setIcon(new ImageIcon(ShopMainFrame.class.getResource("/images/cart20.png")));
 
 		JPanel Sneakers = new JPanel();
 		middlePane.addTab("Sneakers", null, Sneakers, null);
@@ -146,14 +179,62 @@ public class ShopMainFrame extends JFrame {
 		middlePane.addTab("Cart", null, Cart, null);
 		Cart.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		Cart.add(scrollPane_1, BorderLayout.CENTER);
+		JScrollPane cartContentPanelScrollPane = new JScrollPane();
+		Cart.add(cartContentPanelScrollPane, BorderLayout.CENTER);
 		
-		JPanel panel = new JPanel();
-		scrollPane_1.setViewportView(panel);
+		JPanel cartContentPanel = new JPanel();
+		cartContentPanel.setPreferredSize(new Dimension(390, 780));
+		cartContentPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+		cartContentPanelScrollPane.setViewportView(cartContentPanel);
+		/*********cart************/
+		JPanel cartItemPanel = new JPanel();
+		cartItemPanel.setPreferredSize(new Dimension(350, 72));
+		cartItemPanel.setBorder(null);
+		cartContentPanel.add(cartItemPanel);
+		cartItemPanel.setLayout(null);
 		
-		JPanel panel_1 = new JPanel();
-		panel.add(panel_1);
+		JLabel cartItemImageLabel = new JLabel("2002R Grey");
+		cartItemImageLabel.setFont(new Font("굴림", Font.PLAIN, 9));
+		cartItemImageLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		cartItemImageLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
+		cartItemImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cartItemImageLabel.setIcon(new ImageIcon(ShopMainFrame.class.getResource("/images/shoes1.png")));
+		cartItemImageLabel.setBounds(0, 0, 72, 72);
+		cartItemPanel.add(cartItemImageLabel);
+		
+		JLabel cartItemDescLabel = new JLabel("135,000");
+		cartItemDescLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		cartItemDescLabel.setBounds(81, 29, 57, 15);
+		cartItemPanel.add(cartItemDescLabel);
+		
+		JLabel cartItemTotPrice = new JLabel("135,000");
+		cartItemTotPrice.setHorizontalAlignment(SwingConstants.RIGHT);
+		cartItemTotPrice.setBounds(213, 29, 57, 15);
+		cartItemPanel.add(cartItemTotPrice);
+		
+		JComboBox cartItemQtyComboBox = new JComboBox();
+		cartItemQtyComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		cartItemQtyComboBox.setBounds(169, 25, 32, 23);
+		cartItemPanel.add(cartItemQtyComboBox);
+		
+		JButton cartItemDeleteButton = new JButton("");
+		cartItemDeleteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cartItemDeleteButton.setBounds(282, 25, 56, 23);
+		cartItemDeleteButton.setIcon(new ImageIcon(ShopMainFrame.class.getResource("/images/cart_item_delete30.png")));
+		cartItemPanel.add(cartItemDeleteButton);
+		
+		JLabel lblNewLabel = new JLabel("");
+		cartContentPanel.add(lblNewLabel);
+		lblNewLabel.setPreferredSize(new Dimension(350, 15));
+		
+		JPanel cartEmptyItemPanel = new JPanel();
+		cartEmptyItemPanel.setBorder(null);
+		cartEmptyItemPanel.setPreferredSize(new Dimension(350, 72));
+		cartContentPanel.add(cartEmptyItemPanel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setPreferredSize(new Dimension(350, 72));
+		cartEmptyItemPanel.add(lblNewLabel_1);
 
 		JPanel userPanel = new JPanel();
 		middlePane.addTab("User", null, userPanel, null);
